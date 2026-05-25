@@ -43,8 +43,8 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.5;
-            padding: 2rem 1rem;
+            line-height: 1.4;
+            padding: 1.2rem 1rem;
         }
 
         /* 布局容器 */
@@ -55,12 +55,12 @@
 
         /* 头部样式 */
         header {
-            margin-bottom: 3rem;
+            margin-bottom: 1.2rem;
             text-align: center;
         }
 
         header h1 {
-            font-size: 2.25rem;
+            font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: -0.05em;
             margin-bottom: 0.5rem;
@@ -71,22 +71,22 @@
 
         header p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         /* 分类区块 */
         .category-section {
-            margin-bottom: 2.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .category-title {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -99,19 +99,19 @@
         /* 卡片网格：响应式布局 */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 0.6rem;
         }
 
         /* 卡片基础样式 */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.25rem;
+            border-radius: 10px;
+            padding: 0.7rem 0.9rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.7rem;
             text-decoration: none;
             color: inherit;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
@@ -129,8 +129,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             background-color: rgba(59, 130, 246, 0.1);
             color: var(--accent-color);
             border-radius: 8px;
@@ -156,15 +156,15 @@
 
         .card-name {
             font-weight: 500;
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.1rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .card-desc {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
@@ -173,9 +173,9 @@
 
         /* 页脚 */
         footer {
-            margin-top: 5rem;
+            margin-top: 1rem;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
         }
     </style>
@@ -230,11 +230,11 @@
                             <div class="card-desc">私人音乐流媒体服务</div>
                         </div>
                     </a>
-                    <a href="http://192.168.2.200:5244" target="_blank" class="card">
-                        <div class="card-icon"><i data-lucide="folder-open"></i></div>
+                    <a href="http://192.168.2.2:8063" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="image"></i></div>
                         <div class="card-info">
-                            <div class="card-name">AList</div>
-                            <div class="card-desc">网盘聚合与本地挂载</div>
+                            <div class="card-name">MT Photo</div>
+                            <div class="card-desc">照片管理与浏览</div>
                         </div>
                     </a>
                 </div>
@@ -267,13 +267,7 @@
                             <div class="card-desc">PT / BT 挂机下载工具</div>
                         </div>
                     </a>
-                    <a href="http://192.168.2.200:6800" target="_blank" class="card">
-                        <div class="card-icon"><i data-lucide="zap"></i></div>
-                        <div class="card-info">
-                            <div class="card-name">Aria2</div>
-                            <div class="card-desc">全功能远程下载直链</div>
-                        </div>
-                    </a>
+
                 </div>
             </section>
         </main>
