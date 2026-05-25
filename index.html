@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的私人 NAS 导航</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 基础样式与现代色彩变量 */
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --card-hover-border: #3b82f6;
+            --card-hover-shadow: rgba(59, 130, 246, 0.1);
+            --accent-color: #3b82f6;
+        }
+
+        /* 自动暗黑模式切换 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #090d16;
+                --text-color: #f1f5f9;
+                --text-muted: #94a3b8;
+                --card-bg: #131a26;
+                --card-border: #1e293b;
+                --card-hover-border: #60a5fa;
+                --card-hover-shadow: rgba(96, 165, 250, 0.15);
+                --accent-color: #60a5fa;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, border-color 0.3s, cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 头部样式 */
+        header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--text-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 分类区块 */
+        .category-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .category-title i {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* 卡片网格：响应式布局 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        /* 卡片基础样式 */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+        }
+
+        /* 卡片悬停特效 */
+        .card:hover {
+            border-color: var(--card-hover-border);
+            box-shadow: 0 10px 15px -3px var(--card-hover-shadow), 0 4px 6px -4px var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        /* 卡片图标 */
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-color);
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        /* 暗黑模式下微调图标背景 */
+        @media (prefers-color-scheme: dark) {
+            .card-icon {
+                background-color: rgba(96, 165, 250, 0.07);
+            }
+        }
+
+        .card-icon i {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* 卡片文字 */
+        .card-info {
+            overflow: hidden;
+        }
+
+        .card-name {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 页脚 */
+        footer {
+            margin-top: 5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>NAS CONTROL CENTER</h1>
+            <p>私人局域网服务聚合控制台</p>
+        </header>
+
+        <main>
+            <section class="category-section">
+                <div class="category-title">
+                    <i data-lucide="sliders"></i> 系统管理
+                </div>
+                <div class="card-grid">
+                    <a href="http://192.168.2.2" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="router"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">路由器后台</div>
+                            <div class="card-desc">OpenWrt / 网关管理</div>
+                        </div>
+                    </a>
+                    <a href="http://192.168.2.200:9000" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="container"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">Portainer</div>
+                            <div class="card-desc">Docker 容器可视化管理</div>
+                        </div>
+                    </a>
+                    <a href="http://192.168.2.200:8006" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="server"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">Proxmox VE</div>
+                            <div class="card-desc">PVE 虚拟机管理平台</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="category-section">
+                <div class="category-title">
+                    <i data-lucide="film"></i> 媒体娱乐
+                </div>
+                <div class="card-grid">
+                    <a href="http://192.168.2.200:8096" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="clapperboard"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">Jellyfin / Plex</div>
+                            <div class="card-desc">私人家庭影音媒体库</div>
+                        </div>
+                    </a>
+                    <a href="http://192.168.2.200:5244" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="folder-open"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">AList</div>
+                            <div class="card-desc">网盘聚合与本地挂载</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="category-section">
+                <div class="category-title">
+                    <i data-lucide="refresh-cw"></i> 文件与同步
+                </div>
+                <div class="card-grid">
+                    <a href="http://192.168.2.200:8384" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="refresh-dw"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">Syncthing</div>
+                            <div class="card-desc">多端去中心化文件同步</div>
+                        </div>
+                    </a>
+                    <a href="http://192.168.2.200:9001" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="hard-drive"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">MinIO / 存储</div>
+                            <div class="card-desc">本地对象存储服务</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="category-section">
+                <div class="category-title">
+                    <i data-lucide="download-cloud"></i> 网络下载
+                </div>
+                <div class="card-grid">
+                    <a href="http://192.168.2.200:8080" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="arrow-down-to-line"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">qBittorrent</div>
+                            <div class="card-desc">PT / BT 挂机下载工具</div>
+                        </div>
+                    </a>
+                    <a href="http://192.168.2.200:6800" target="_blank" class="card">
+                        <div class="card-icon"><i data-lucide="zap"></i></div>
+                        <div class="card-info">
+                            <div class="card-name">Aria2</div>
+                            <div class="card-desc">全功能远程下载直链</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Private NAS Dashboard. Powered by Cloudflare Pages.</p>
+        </footer>
+    </div>
+
+    <script>
+        // 初始化 Lucide 图标渲染
+        lucide.createIcons();
+    </script>
+</body>
+</html>
